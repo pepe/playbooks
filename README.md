@@ -1,4 +1,3 @@
-playbooks
-=========
+# Ansible playbooks used at LS
 
-Ansible playbooks 
+In this repository, we will store all ansible playbooks used on our servers
