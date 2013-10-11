@@ -1,0 +1,27 @@
+---
+  - hosts: webservers
+
+    vars:
+      servers:
+        - name: laststar.eu
+          aliases:
+            - www.laststar.eu
+          repo: git@github.com:LastStar/wrabec
+        - name: wrabec.cz
+          aliases:
+            - wrabec.eu
+            - www.wrabec.cz
+            - www.wrabec.eu
+          repo: git@github.com:LastStar/wrabec
+        - name: ralprojekt.cz
+          aliases:
+            - www.ralprojekt.cz
+          repo: git@github.com:LastStar/wrabec
+
+      listen: "*:80"
+
+    tasks:
+      - include: tasks/setup-vhost.yml
+
+    handlers:
+      - include: handlers/handlers.yml

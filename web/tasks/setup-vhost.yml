@@ -1,0 +1,30 @@
+---
+  - name: pull repos
+    git: dest=/usr/www/{{ item.name }} repo={{ item.repo }}
+    with_items: servers
+    notify:
+      - restart nginx
+
+  - name: bundle gems
+    shell: bundle install chdir=/usr/www/{{ item.name }}
+    with_items: servers
+    notify:
+      - restart nginx
+
+  - name: build middleman
+    shell: bundle exec middleman build chdir=/usr/www/{{ item.name }}
+    with_items: servers
+    notify:
+      - restart nginx
+
+  - name: add nginx vhosts
+    template: src=templates/vhost.j2 dest=/etc/nginx/sites-available/{{ item.name }}
+    with_items: servers
+    notify:
+      - restart nginx
+
+  - name: link nginx vhosts in sites-enabled
+    file: src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link
+    with_items: servers
+    notify:
+      - restart nginx

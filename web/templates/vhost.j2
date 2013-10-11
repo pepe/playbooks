@@ -1,0 +1,6 @@
+server {
+  listen {{ listen }};
+  server_name {{ item.name }}{% for alias in item.aliases %} {{ alias }}{% endfor %};
+  root /usr/www/{{ item.name }}/build;
+  index index.html;
+}
