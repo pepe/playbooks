@@ -1,0 +1,26 @@
+---
+  - name: install libxml library
+    apt: name=libxml2-dev state=latest
+
+  - name: install libxslt library
+    apt: name=libxslt1-dev state=latest
+
+  - name: install bundler
+    gem: name=bundler state=latest
+
+  - name: install therubyracer
+    gem: name=therubyracer state=latest
+
+  - name: pull repos
+    git: dest=/usr/www/{{ item.name }} repo={{ item.repo }}
+    with_items: vhosts
+
+  - name: bundle gems
+    shell: bundle install chdir=/usr/www/{{ item.name }}
+    with_items: vhosts
+
+  - name: build middleman
+    shell: bundle exec middleman build chdir=/usr/www/{{ item.name }}
+    with_items: vhosts
+
+

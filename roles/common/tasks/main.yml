@@ -1,0 +1,13 @@
+---
+  - name: install git package
+    apt: name=git state=latest
+
+  - name: install build essential package
+    apt: name=build-essential state=latest
+
+  - name: install ruby 1.9 package
+    apt: name=ruby1.9.1 state=latest
+
+  - name: install ruby 1.9 dev package
+    apt: name=ruby1.9.1-dev state=latest
+

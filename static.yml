@@ -1,0 +1,9 @@
+---
+- name: Setup static sites
+  hosts: static
+  user: root
+
+  roles:
+    - common
+    - nginx
+    - middleman

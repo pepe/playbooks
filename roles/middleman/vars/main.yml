@@ -1,0 +1,9 @@
+---
+vhosts:
+  - name: laststar.eu
+    repo: git@github.com:LastStar/wrabec
+  - name: wrabec.cz
+    repo: git@github.com:LastStar/wrabec
+  - name: ralprojekt.cz
+    repo: git@github.com:LastStar/wrabec
+

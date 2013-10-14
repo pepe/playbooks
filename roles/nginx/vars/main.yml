@@ -1,0 +1,19 @@
+---
+user: www-data
+worker_processes: $ansible_processor_count
+pid: /var/run/nginx.pid
+worker_connections: 768
+vhosts:
+  - name: laststar.eu
+    aliases:
+      - www.laststar.eu
+  - name: wrabec.cz
+    aliases:
+      - wrabec.eu
+      - www.wrabec.cz
+      - www.wrabec.eu
+  - name: ralprojekt.cz
+    aliases:
+      - www.ralprojekt.cz
+
+

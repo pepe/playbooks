@@ -1,0 +1,22 @@
+---
+  - name: install build essential package
+    apt: name=build-essential state=latest
+
+  - name: install libxml library
+    apt: name=libxml2-dev state=latest
+
+  - name: install libxslt library
+    apt: name=libxslt1-dev state=latest
+
+  - name: install ruby 1.9 package
+    apt: name=ruby1.9.1 state=latest
+
+  - name: install ruby 1.9 dev package
+    apt: name=ruby1.9.1-dev state=latest
+
+  - name: install bundler
+    gem: name=bundler state=latest
+
+  - name: install therubyracer
+    gem: name=therubyracer state=latest
+
