@@ -1,6 +1,0 @@
----
-  - hosts: all
-
-    tasks:
-      - name: install git package
-        apt: name=git state=latest
