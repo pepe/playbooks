@@ -1,9 +1,9 @@
-nginx
+Web
 =====
 
 ## nginx
 
-This playbook install the nginx package.
+This playbook installs the nginx package.
 
 ### Vars
 
@@ -31,19 +31,19 @@ $ ansible-playbook nginx.yml -uroot
 
 ## vhost
 
-This playbook set up all static webs
+This playbook set up all static webs with the [Middleman](http://www.middlemanapp.com)
 
 ### Vars
 
-* **name**: The vhost name
+* **name**: The vhost name and main URL
     * Type: String
-    * Default: redirect_$server_name
-* **listen**:
+    * Example: example.org
+* **listen**: Port on which server will listen for this URL
     * Type: String
-    * Default: *:80
-* **server_name**: The server domain name
+    * Example: ```*:80```
+* **aliases**: Other server URLs
+    * Type: Array of strings
+    * Example: www.example.org
+* **repo**: Repository from which source code is pulled
     * Type: String
-    * Default: example.org
-* **redirect_url**: The redirect URL
-    * Type: String
-    * Default: http://www.$server_name
+    * Example: git@github.com:LastStar/laststar.eu
