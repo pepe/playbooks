@@ -9,7 +9,7 @@
   authorized_key: user=deploy
                   state=present
                   key="{{ item }}"
-  with_file: 'public_keys/josef-pospisil'
+  with_file: "{{ ansible_local_path }}/files/public_keys/josef-pospisil"
 
 - name: Remove github.com from deploy's known_hosts
   file: dest=/home/deploy/known_hosts state=absent
@@ -21,9 +21,8 @@
   sudo: True
   sudo_user: deploy
 
-# FIXME generate rsa pair on server and upload key to github
 - name: Set up id_rsa key for deploy user
-  copy: src='/Users/pepe/.ssh/id_rsa'
+  copy: src="{{ ansible_local_path }}/files/private_keys/id_rsa"
         dest=/home/deploy/.ssh/id_rsa
         owner=deploy
         group=deploy
