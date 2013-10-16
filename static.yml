@@ -5,5 +5,8 @@
 
   roles:
     - common
+    - deploy-user
+    - ssh
+    - ruby-2.0.0
     - nginx
     - middleman

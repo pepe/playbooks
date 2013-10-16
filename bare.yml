@@ -1,0 +1,9 @@
+---
+- name: Setup bare server
+  hosts: all
+  user: root
+
+  roles:
+    - common
+    - deploy-user
+    - ssh

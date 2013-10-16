@@ -1,0 +1,7 @@
+---
+- name: Update middleman sites
+  hosts: static
+  user: root
+
+  roles:
+    - middleman

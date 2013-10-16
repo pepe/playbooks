@@ -1,26 +1,30 @@
 ---
-  - name: install libxml library
+  - name: Install libxml library
     apt: name=libxml2-dev state=latest
 
-  - name: install libxslt library
+  - name: Install libxslt library
     apt: name=libxslt1-dev state=latest
 
-  - name: install bundler
+  - name: Install bundler
     gem: name=bundler state=latest
 
-  - name: install therubyracer
+  - name: Install therubyracer
     gem: name=therubyracer state=latest
 
-  - name: pull repos
+  - name: Pull repos
     git: dest=/usr/www/{{ item.name }} repo={{ item.repo }}
     with_items: vhosts
+    sudo: True
+    sudo_user: deploy
 
-  - name: bundle gems
-    shell: bundle install chdir=/usr/www/{{ item.name }}
+  - name: Bundle gems
+    shell: bundle install --deployment chdir=/usr/www/{{ item.name }}
     with_items: vhosts
+    sudo: True
+    sudo_user: deploy
 
-  - name: build middleman
+  - name: Build middleman
     shell: bundle exec middleman build chdir=/usr/www/{{ item.name }}
     with_items: vhosts
-
-
+    sudo: True
+    sudo_user: deploy

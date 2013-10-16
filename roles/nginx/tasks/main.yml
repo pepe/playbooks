@@ -1,24 +1,24 @@
 ---
-  - name: install nginx
+  - name: Install nginx
     apt: name=nginx state=latest
 
-  - name: write nginx.conf
+  - name: Write nginx.conf
     template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
     notify:
       - restart nginx
 
-  - name: delete default vhost
+  - name: Delete default vhost
     file: path=/etc/nginx/sites-enabled/default state=absent
     notify:
       - restart nginx
 
-  - name: add nginx vhosts
+  - name: Add nginx vhosts
     template: src=vhost.j2 dest=/etc/nginx/sites-available/{{ item.name }}
     with_items: vhosts
     notify:
       - restart nginx
 
-  - name: link nginx vhosts in sites-enabled
+  - name: Link nginx vhosts in sites-enabled
     file: src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link
     with_items: vhosts
     notify:

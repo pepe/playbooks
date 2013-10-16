@@ -1,13 +1,26 @@
 ---
-  - name: install git package
-    apt: name=git state=latest
+- name: Upgrade apt packages
+  apt: upgrade=yes
+       update_cache=yes
 
-  - name: install build essential package
-    apt: name=build-essential state=latest
+- name: Install GIT
+  apt: name=git
+       state=latest
 
-  - name: install ruby 1.9 package
-    apt: name=ruby1.9.1 state=latest
+- name: Install NTP
+  apt: pkg=ntp
+       state=latest
 
-  - name: install ruby 1.9 dev package
-    apt: name=ruby1.9.1-dev state=latest
+- name: Install Vim
+  apt: pkg=vim
+       state=latest
+
+- name: Install prerequisite packages that are necessary to compile applications and gems with native extensions
+  apt: pkg={{ item }}
+  with_items:
+    - autoconf
+    - build-essential
+
+- name: Install python-software-properties so the apt_repository module will work properly
+  apt: pkg=python-software-properties
 
