@@ -1,4 +1,4 @@
 ---
 ansible_local_path: /usr/local/etc/ansible
-
+listen: "*:80"
 

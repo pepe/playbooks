@@ -1,0 +1,11 @@
+---
+- name: Setup dynamic sites
+  hosts: dynamic
+  user: root
+
+  roles:
+    - common
+    - deploy-user
+    - ssh
+    - ruby-2.0.0
+    - nginx-passenger
