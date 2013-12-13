@@ -15,5 +15,12 @@ vhosts:
   - name: ralprojekt.cz
     aliases:
       - www.ralprojekt.cz
+  - name: vmerunka.cz
+    aliases:
+      - www.vmerunka.cz
+  - name: dropouts.cz
+    aliases:
+      - www.dropouts.cz
+      - www.dropouts.eu
 
 
