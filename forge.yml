@@ -1,0 +1,8 @@
+---
+- name: Setup forges
+  hosts: dynamic
+  user: root
+
+  roles:
+    - forge
+

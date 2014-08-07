@@ -7,6 +7,7 @@
     - common
     - deploy-user
     - ssh
-    - ruby-2.0.0
-    - nginx-passenger
+    - abtris.nginx-passenger
+    - joshualund.ruby-common
+    - lesmyrmidons.mongodb
     - forge

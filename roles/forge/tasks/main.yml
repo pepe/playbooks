@@ -1,0 +1,92 @@
+---
+  - name: Install Image magick
+    apt: name=imagemagick
+
+  - name: Install freetype
+    apt: name=libfreetype6 state=latest
+
+  - name: Install freetype development
+    apt: name=libfreetype6-dev state=latest
+
+  - name: Install fontforge
+    apt: name=fontforge-nox state=latest
+
+  - name: Install fontforge developer
+    apt: name=libfontforge-dev state=latest
+
+  - name: Install fontforge python
+    apt: name=python-fontforge state=latest
+
+  - name: Create src directory
+    file: path=/usr/src owner=deploy group=deploy state=directory
+
+  - name: Create www directory
+    file: path=/usr/www owner=deploy group=deploy state=directory
+
+  - name: Clone repositories
+    git: dest=/usr/src/{{ item.name }} repo={{ item.repo }}
+    with_items: vhosts
+    sudo: True
+    sudo_user: deploy
+
+  - name: Bundle gems
+    shell: bundle install --without development test --deployment chdir=/usr/src/{{ item.name }}
+    with_items: vhosts
+    sudo: True
+    sudo_user: deploy
+
+  - name: Mina config
+    file: src=/usr/src/{{ item.name }}/config/deploy.rb.sample dest=/usr/src/{{ item.name }}/config/deploy.rb state=link
+    with_items: vhosts
+    sudo: True
+    sudo_user: deploy
+
+  - name: Mina setup
+    shell: bundle exec mina {{ item.environment }} setup chdir=/usr/src/{{item.name}}
+    with_items: vhosts
+    sudo: True
+    sudo_user: deploy
+
+  - name: Mina deploy
+    shell: bundle exec mina {{ item.environment }} deploy chdir=/usr/src/{{item.name}}
+    with_items: vhosts
+    sudo: True
+    sudo_user: deploy
+
+  - name: Write nginx.conf
+    template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    notify:
+      - Restart nginx
+
+  - name: Delete default vhost
+    file: path=/etc/nginx/sites-enabled/default state=absent
+    notify:
+      - Restart nginx
+
+  - name: Add nginx vhosts
+    template: src=vhost.j2 dest=/etc/nginx/sites-available/{{ item.name }}
+    with_items: vhosts
+    notify:
+      - Restart nginx
+
+  - name: Link nginx vhosts in sites-enabled
+    file: src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link
+    with_items: vhosts
+    notify:
+      - Restart nginx
+
+  - name: Create ssl dir
+    file: path=/etc/nginx/ssl owner=root group=root state=directory
+
+  - name: Copy keys
+    copy: src={{ ansible_local_path }}/files/certificates/{{ item.name }}.key dest=/etc/nginx/ssl/{{ item.name }}.key
+    with_items: vhosts
+    notify:
+      - Restart nginx
+
+  - name: Copy certificates
+    copy: src={{ ansible_local_path }}/files/certificates/{{ item.name }}.key dest=/etc/nginx/ssl/{{ item.name }}.key
+    with_items: vhosts
+    notify:
+      - Restart nginx
+

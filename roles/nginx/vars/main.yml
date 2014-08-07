@@ -22,5 +22,9 @@ vhosts:
     aliases:
       - www.dropouts.cz
       - www.dropouts.eu
+  - name: libenec.cz
+    aliases:
+      - www.libenec.cz
+      - www.libenec.eu
 
 

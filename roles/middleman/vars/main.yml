@@ -10,4 +10,6 @@ vhosts:
     repo: git@github.com:LastStar/vmerunka.cz
   - name: dropouts.cz
     repo: git@github.com:LastStar/dropouts.cz
+  - name: libenec.cz
+    repo: git@github.com:pepe/libenec.cz
 

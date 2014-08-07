@@ -1,0 +1,31 @@
+---
+ruby_version: ruby-2.1.2
+ruby_checksum: f22a6447811a81f3c808d1c2a5ce3b5f5f0955c68c9a749182feb425589e6635
+ruby_download_location: http://cache.ruby-lang.org/pub/ruby/2.1/{{ruby_version}}.tar.gz
+
+url_apt_key: "http://keyserver.ubuntu.com/pks/lookup?op=get&search="
+mongodb_repository: "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen"
+
+user: www-data
+worker_processes: 2
+pid: /var/run/nginx.pid
+worker_connections: 768
+
+vhosts:
+  - name: www.briefcasetype.com
+    aliases:
+      - www.briefcasetype.com
+      - briefcasetype.com
+    repo: git@github.com:LastStar/bbct
+    environment: production
+  - name: beta.briefcasetype.com
+    aliases:
+      - beta.briefcasetype.com
+    repo: git@github.com:LastStar/bbct
+    environment: production
+  - name: www.suitcasetype.com
+    aliases:
+      - www.suitcasetype.com
+      - suitcasetype.com
+    repo: git@github.com:LastStar/sct
+    environment: production

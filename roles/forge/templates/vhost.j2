@@ -1,0 +1,12 @@
+server {
+  listen 80;
+  listen 443 ssl;
+
+  ssl_certificate     /etc/nginx/ssl/{{ item.name }}.crt;
+  ssl_certificate_key /etc/nginx/ssl/{{ item.name }}.key;
+  server_name {{ item.name }}{% for alias in item.aliases %} {{ alias }}{% endfor %};
+  root /usr/www/{{ item.name }}/current/public;
+
+  passenger_app_env {{ item.environment }};
+  passenger_enabled on;
+}
