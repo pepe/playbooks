@@ -22,10 +22,15 @@ vhosts:
     aliases:
       - beta.briefcasetype.com
     repo: git@github.com:LastStar/bbct
-    environment: production
+    environment: staging
   - name: www.suitcasetype.com
     aliases:
       - www.suitcasetype.com
       - suitcasetype.com
     repo: git@github.com:LastStar/sct
     environment: production
+  - name: beta.suitcasetype.com
+    aliases:
+      - beta.suitcasetype.com
+    repo: git@github.com:LastStar/sct
+    environment: staging
