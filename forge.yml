@@ -1,5 +1,5 @@
 ---
-- name: Setup forges
+- name: Setup type forges sites
   hosts: dynamic
   user: root
 

@@ -17,12 +17,6 @@
   - name: Install fontforge python
     apt: name=python-fontforge state=latest
 
-  - name: Create src directory
-    file: path=/usr/src owner=deploy group=deploy state=directory
-
-  - name: Create www directory
-    file: path=/usr/www owner=deploy group=deploy state=directory
-
   - name: Clone repositories
     git: dest=/usr/src/{{ item.name }} repo={{ item.repo }}
     with_items: vhosts

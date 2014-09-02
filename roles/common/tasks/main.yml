@@ -24,3 +24,10 @@
 - name: Install python-software-properties so the apt_repository module will work properly
   apt: pkg=python-software-properties
 
+- name: Create src directory
+  file: path=/usr/src owner=deploy group=deploy state=directory
+
+- name: Create www directory
+  file: path=/usr/www owner=deploy group=deploy state=directory
+
+

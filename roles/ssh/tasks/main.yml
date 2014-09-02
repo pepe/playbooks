@@ -4,3 +4,7 @@
               regexp="^#?PasswordAuthentication"
               line="PasswordAuthentication no"
   notify: Restart SSH
+
+- name: Install Mosh
+  apt: name=mosh
+       state=latest

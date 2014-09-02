@@ -1,5 +1,5 @@
 ---
-- name: Setup dynamic sites
+- name: Setup server for dynamic sites
   hosts: dynamic
   user: root
 
@@ -10,4 +10,3 @@
     - abtris.nginx-passenger
     - joshualund.ruby-common
     - lesmyrmidons.mongodb
-    - forge
